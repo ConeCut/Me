@@ -63,11 +63,12 @@ Edit the typed modules in `src/content/`, then run `npm run build && npm run cv 
 
 ## Deployment
 
-The site is fully static, so it suits Vercel or any Node host:
+Deployed to Cloudflare Workers with Workers Builds (Worker `me`, deploying from `main`). Cloudflare configures OpenNext automatically during each build, so the repo holds no `wrangler.jsonc`.
 
-1. Import the repository into Vercel (framework preset: Next.js).
-2. Set the environment variable `SITE_URL` to the production origin (e.g. `https://example.com`). It is used for canonical URLs, Open Graph, the sitemap and robots.
-3. Commit `public/cv.pdf` after content changes. It is generated locally, not during the hosted build.
+1. Keep the `package.json` `name` equal to the Worker name (`me`). The generated self-reference binding uses it.
+2. Leave Next.js Cache Components off. On Workers it makes every request hang.
+3. Set the build variable `SITE_URL` to the production origin (e.g. `https://me.<account>.workers.dev`). It is used for canonical URLs, Open Graph, the sitemap and robots.
+4. Commit `public/cv.pdf` after content changes. It is generated locally, not during the hosted build.
 
 ## Licence
 
