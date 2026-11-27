@@ -13,6 +13,7 @@ Personal website + interactive CV. Static Next.js app; no backend, no database, 
 - `node scripts/screenshots.mjs <dir> [url]` — full-page shots at 375/768/1440 + console-error and overflow check
 
 ## Architecture
+- Hosting: Cloudflare Workers (Workers Builds auto-configures OpenNext). Keep `package.json` `name` = `me`, and do not enable `cacheComponents` (requests hang on Workers).
 - `src/content/*.ts` — **the only place facts live.** Profile, experience, education, skills, projects, qualifications. The site and `/cv` both render from here; never hard-code a fact in a component.
 - `src/app/(site)/` — the one-page site (layout adds header, footer, grain, MotionConfig, JSON-LD). `src/app/cv/` — print-styled CV outside the site chrome.
 - `src/components/sections/*` — one file per section. `src/components/ui/*` — `Section` frame, `Reveal`, `MotionProvider`.
